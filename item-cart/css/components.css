@@ -53,6 +53,30 @@
   color: var(--color-accent);
 }
 
+/* The basket mark sits before the wordmark. Its body follows the logo colour
+   (dark green in the header, white in the footer); the item is always orange. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.logo__mark {
+  height: 1.4em;
+  width: auto;
+  flex: none;
+}
+
+.logo__mark .mark-item {
+  fill: var(--color-accent);
+}
+
+@media (max-width: 360px) {
+  .logo {
+    font-size: var(--fs-md);
+  }
+}
+
 .nav-links {
   display: flex;
   align-items: center;

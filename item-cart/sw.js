@@ -18,7 +18,7 @@
 //       only if you want every phone to throw away its saved copies.
 // =====================================================================
 
-const VERSION = "item-cart-v1";
+const VERSION = "item-cart-v2";
 const SLOW_NETWORK_MS = 4000;
 
 // Saved on install so the offline page itself always works.
