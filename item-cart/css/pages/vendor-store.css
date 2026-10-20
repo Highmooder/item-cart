@@ -1,0 +1,111 @@
+/* ============================================
+   VENDOR STORE — layout specific to vendor-store.html
+   ============================================ */
+
+.vendor-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-6) var(--space-5);
+  flex-wrap: wrap;
+}
+
+.vendor-hero__logo {
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-alt);
+  flex-shrink: 0;
+}
+
+.vendor-hero__info {
+  flex: 1;
+  min-width: min(220px, 100%);
+}
+
+.vendor-hero__name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.vendor-hero__name-row h1 {
+  margin: 0;
+  font-size: var(--fs-2xl); /* same size as the Marketplace and Vendors headings */
+  overflow-wrap: anywhere;
+}
+
+.vendor-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-faint);
+}
+.vendor-hero__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.vendor-hero__location svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.vendor-hero__description {
+  margin-top: var(--space-3);
+  max-width: 60ch;
+  overflow-wrap: anywhere;
+}
+
+.vendor-hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.vendor-inactive-notice {
+  background: var(--color-danger-tint);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-6);
+}
+
+.vendor-products {
+  padding-bottom: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .vendor-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .vendor-hero__actions {
+    width: 100%;
+  }
+  .vendor-hero__actions .btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .vendor-hero {
+    padding-block: var(--space-5) var(--space-4);
+  }
+
+  .vendor-hero__name-row h1 {
+    font-size: var(--fs-xl);
+  }
+}

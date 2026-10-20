@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Checkout — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/checkout.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="checkout-header">
+      <div class="container">
+        <h1>Checkout</h1>
+        <p>Item cart records your order here — no payment is taken on this page. You'll pay by bank transfer on the next page.</p>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <div class="loading-state" data-page-loading role="status">Loading checkout…</div>
+
+      <div class="empty-state" id="checkout-empty" style="display:none;">
+        <h2>Your cart is empty.</h2>
+        <p>Add something from the marketplace before checking out.</p>
+        <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+      </div>
+
+      <div class="empty-state" id="checkout-issues" style="display:none;">
+        <h2>Some items need attention.</h2>
+        <p>One or more items in your cart are no longer available. Please return to your cart to remove them before checking out.</p>
+        <a href="cart.html" class="btn btn-primary btn-sm">Go to Cart</a>
+      </div>
+
+      <div class="checkout-layout" id="checkout-form-wrap" style="display:none;">
+        <div class="checkout-form-card">
+          <p class="checkout-account-note" id="checkout-account-note" style="display:none;"></p>
+          <form id="checkout-form" novalidate>
+            <div class="form-group">
+              <label for="name-input">Full name</label>
+              <input type="text" id="name-input" name="name" autocomplete="name" />
+              <span class="field-error" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone-input">Phone number</label>
+              <input type="tel" id="phone-input" name="phone" autocomplete="tel" placeholder="080..." />
+              <span class="field-error" id="phone-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email-input">Email</label>
+              <input type="text" id="email-input" name="email" autocomplete="email" />
+              <span class="field-error" id="email-error"></span>
+            </div>
+
+            <fieldset class="form-group form-fieldset">
+              <legend>Delivery or pickup</legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="deliveryMethod" value="pickup" checked />
+                  Pickup from vendor
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="deliveryMethod" value="delivery" />
+                  Delivery
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="form-group" id="location-field" style="display:none;">
+              <label for="location-input">Delivery location</label>
+              <input type="text" id="location-input" name="location" placeholder="Hostel / department / landmark" />
+              <span class="field-error" id="location-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="note-input">Additional order note (optional)</label>
+              <textarea id="note-input" name="note" rows="3" placeholder="Anything the vendor should know"></textarea>
+            </div>
+
+            <fieldset class="form-group form-fieldset" id="payment-field" style="display:none;">
+              <legend>How would you like to pay?</legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="paymentMethod" value="manual" checked />
+                  <span>Bank transfer to Item cart <small class="payment-option__hint">No extra fee. Item cart confirms your payment.</small></span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="paymentMethod" value="online" />
+                  <span>Pay online now <small class="payment-option__hint" id="payment-online-hint">Bank transfer, USSD or card. Confirmed instantly.</small></span>
+                </label>
+              </div>
+              <p class="payment-fee-note" id="payment-fee-note"></p>
+            </fieldset>
+
+            <p class="form-consent">By placing an order you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+
+            <p class="form-submit-error" id="checkout-submit-error"></p>
+
+            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+          </form>
+        </div>
+
+        <aside class="checkout-summary-card">
+          <h2>Order Summary</h2>
+          <div id="checkout-summary-groups"></div>
+          <div class="checkout-row"><span>Subtotal</span><span id="checkout-overall-subtotal">₦0</span></div>
+          <div class="checkout-row"><span id="checkout-delivery-label">Delivery fee</span><span id="checkout-overall-delivery">₦0</span></div>
+          <div class="checkout-row" id="checkout-fee-row" style="display:none;"><span>Online payment fee</span><span id="checkout-overall-fee">₦0</span></div>
+          <div class="checkout-grand-total-row">
+            <span>Total — one payment to Item cart</span>
+            <span id="checkout-grand-total">₦0</span>
+          </div>
+          <p class="checkout-multivendor-note" id="checkout-multivendor-note">
+            Your cart includes items from more than one vendor. Item cart still records one payment from you — it's split into a vendor-specific order per vendor behind the scenes, for fulfillment only.
+          </p>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

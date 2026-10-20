@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Your Cart — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/cart.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="cart-header">
+      <div class="container">
+        <h1>Your Cart</h1>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <div class="loading-state" data-page-loading role="status">Loading your cart…</div>
+
+      <div class="empty-state" id="cart-empty" style="display:none;">
+        <h2>Your cart is empty.</h2>
+        <p>Browse the marketplace to find something for your campus.</p>
+        <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+      </div>
+
+      <div class="cart-layout" id="cart-layout" style="display:none;">
+        <div>
+          <p class="cart-issues-banner" id="cart-issues"></p>
+          <div class="cart-items" id="cart-items"></div>
+        </div>
+
+        <aside class="cart-summary">
+          <div class="cart-summary__row">
+            <span>Items</span>
+            <span id="cart-item-count">0</span>
+          </div>
+          <div class="cart-summary__row cart-summary__row--total">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₦0</span>
+          </div>
+          <p class="cart-summary__note">Delivery or pickup fee is calculated at checkout.</p>
+          <button type="button" class="btn btn-primary btn-block" id="checkout-btn">Proceed to Checkout</button>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Item cart: public pages may be listed by search engines.
+# The private pages (account, cart, checkout, messages, admin, vendor pages) carry a
+# "noindex" tag, so they are kept out of search results.
+User-agent: *
+Allow: /
+
+Sitemap: https://YOUR-SITE-ADDRESS/sitemap.xml

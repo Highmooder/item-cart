@@ -1,0 +1,159 @@
+/* ============================================
+   VENDOR ORDERS — the vendor's own orders page
+   Built on the shared listing, chip, button, badge, notice, dialog and
+   toast styles (vendor-products.css holds the notice/dialog/toast ones,
+   and this page loads it too); only what is specific to orders is here.
+   ============================================ */
+
+#vo-stores {
+  margin-bottom: var(--space-4);
+}
+
+/* Same spacing rhythm as Manage products: one step between each block. */
+#vo-app .listing-controls {
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- Order cards ---------- */
+.vo-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.vo-order {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.vo-order__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.vo-order__head h3 {
+  margin: 0;
+  font-size: var(--fs-md);
+}
+
+.vo-order__time {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vo-order__customer {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.vo-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.vo-items li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--fs-sm);
+}
+
+.vo-items li span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.vo-items li span:last-child {
+  flex: none;
+  color: var(--color-ink-soft);
+}
+
+.vo-order__total {
+  display: grid;
+  gap: var(--space-1);
+  margin: var(--space-3) 0;
+}
+
+.vo-order__total div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vo-order__total strong {
+  color: var(--color-ink);
+}
+
+.vo-order__where {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-sm);
+  overflow-wrap: anywhere;
+}
+
+/* The shared note boxes sit tight to what is above them; give them air here. */
+.vo-order .vp-item__note {
+  margin: 0 0 var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.vo-order__guest {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vo-order__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Quick links under the list */
+.vo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: var(--space-5) 0 0;
+  font-size: var(--fs-sm);
+}
+
+.vo-links a {
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+@media (min-width: 900px) {
+  .vo-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+/* On phones the buttons fill the card and are roomy to tap. */
+@media (max-width: 640px) {
+  .vo-order {
+    padding: var(--space-3);
+  }
+
+  .vo-order__actions .btn {
+    flex: 1 1 140px;
+    min-height: 44px;
+  }
+
+  #vo-refresh {
+    flex: 1 1 100%;
+  }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <title>Terms of Service — Item cart</title>
+  <meta name="description" content="The rules for using the Item cart marketplace as a customer or a vendor." />
+  <meta property="og:site_name" content="Item cart" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Terms of Service — Item cart" />
+  <meta property="og:description" content="The rules for using the Item cart marketplace as a customer or a vendor." />
+  <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/legal.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="listing-header">
+      <div class="container">
+        <h1>Terms of Service</h1>
+        <p>Last updated: <span data-legal="lastUpdated"></span></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container legal">
+        <div class="legal__draft" id="legal-draft" hidden>
+          <strong>Draft.</strong> This text is a starting template written for how Item cart works today. It is not legal advice.
+          Have it reviewed (ideally by a Nigerian lawyer) and fill in your real details before you launch.
+          This notice disappears when <code>legal.draft</code> is set to <code>false</code> in <code>js/data/config.js</code>.
+        </div>
+
+        <h2>1. About these terms</h2>
+        <p>These terms apply when you use the <span data-legal="businessName"></span> marketplace ("we", "us"). By using the site, placing an order or applying to sell, you agree to them and to our <a href="privacy.html">Privacy Policy</a>. If you don't agree, please don't use the site.</p>
+
+        <h2>2. What we do</h2>
+        <p>We run a platform where independent vendors list products and services for students. Vendors, not us, make and sell what they list. We record your order, collect your payment, help coordinate delivery or pickup, and pay vendors for completed orders.</p>
+
+        <h2>3. Accounts and ordering</h2>
+        <p>You can order as a guest or with an account. Give accurate details, because we and the vendor use them to deliver your order. Keep your password private; you are responsible for activity on your account.</p>
+
+        <h2>4. Prices, delivery and pickup</h2>
+        <p>Prices are set by vendors and shown in naira. Delivery costs a flat fee per checkout when you choose delivery; pickup is free. The total you see at checkout is what you pay.</p>
+
+        <h2>5. Paying</h2>
+        <ul>
+          <li>You pay us once for everything in your checkout, even if it includes items from several vendors. Don't pay vendors directly for orders placed here.</li>
+          <li><strong>Bank transfer:</strong> there is no extra fee. Your order is confirmed once we have checked your payment.</li>
+          <li><strong>Pay online:</strong> payment is taken by Paystack. A small payment fee, shown before you choose, is added to the total and goes to the payment provider. Your order is confirmed once Paystack confirms your payment.</li>
+          <li>A vendor starts preparing your order only after your payment is confirmed.</li>
+        </ul>
+
+        <h2>6. Cancellations, refunds and problems</h2>
+        <ul>
+          <li>If something is wrong with your order (missing, not as described, or not delivered), contact us at <a data-legal-mail href="#"></a> as soon as you can, with your order number.</li>
+          <li>If we cancel an order or part of an order, or agree a refund, online payments are refunded to the original payment method through Paystack, and bank transfer payments are returned to you by us. Refunds can take time to appear.</li>
+          <li>We may not be able to recover a payment provider's own fee, and a full refund of an online payment may or may not include it. We will tell you before we refund.</li>
+          <li>We decide disputes between customers and vendors fairly and may rely on the information both sides give us.</li>
+        </ul>
+
+        <h2>7. Messages</h2>
+        <p>The in-site messages are for talking about an order or a listing. Don't use them to harass anyone, to share contact details so that a sale happens outside the platform, or to send anything unlawful. We may review flagged messages and may limit or close accounts that break these rules.</p>
+
+        <h2>8. Ask Item cart AI</h2>
+        <p>Ask Item cart AI is a shopping helper. It understands what you ask, searches the products on the site, can compare products and suggest one, and can point to what a product's own listing says. It can misunderstand you, and the results are only as accurate as vendors' listings, so always check the product, price and vendor details before you order. It is not professional advice.</p>
+
+        <h2>9. Rules for everyone</h2>
+        <p>Don't list, buy or sell anything illegal, counterfeit, dangerous or harmful (including drugs, weapons and stolen goods). Don't misuse the site, try to break its security, post fake listings or fake reviews, or use it to deceive anyone.</p>
+
+        <h2>10. For vendors</h2>
+        <ul>
+          <li>Applications are reviewed by us and are not automatically approved. We may refuse or remove a vendor at our discretion.</li>
+          <li>Keep your listings, prices and availability accurate. Prepare and deliver orders once they are paid, and mark them ready when they are.</li>
+          <li>We pay you for completed orders, less any commission that applies (none during launch). We tell vendors in advance before pricing or commission changes.</li>
+          <li>If an order is refunded after you have been paid for it, the amount may be deducted from what we owe you.</li>
+          <li>Don't take customers or payments off the platform for orders placed here.</li>
+        </ul>
+
+        <h2>11. Our responsibility</h2>
+        <p>We work to keep the site available and accurate, but we can't promise it will always be uninterrupted or error-free. Vendors are responsible for the products and services they sell. To the extent the law allows, we are not liable for losses caused by a vendor, by a payment or delivery provider, or by events outside our control, and our total liability to you for any one order is limited to the amount you paid for it. Nothing in these terms limits rights you have under Nigerian consumer law that cannot be limited.</p>
+
+        <h2>12. Changes and ending</h2>
+        <p>We may update these terms and will change the date at the top; for important changes we will tell you on the site. You can stop using the site at any time. We may suspend or end access for anyone who breaks these terms.</p>
+
+        <h2>13. Governing law</h2>
+        <p>These terms are governed by the laws of the Federal Republic of Nigeria.</p>
+
+        <h2>14. Contact</h2>
+        <p>Questions about these terms: <a data-legal-mail href="#"></a>.</p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/legal.js"></script>
+</body>
+</html>

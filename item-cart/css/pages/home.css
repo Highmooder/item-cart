@@ -1,0 +1,136 @@
+/* ============================================
+   HOMEPAGE — layout specific to index.html
+   ============================================ */
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.school-note {
+  margin-bottom: var(--space-4);
+}
+
+.hero__copy h1 {
+  max-width: 14ch;
+  margin-bottom: var(--space-4);
+}
+
+.hero__copy p {
+  font-size: var(--fs-md);
+  max-width: 46ch;
+}
+
+.hero__search {
+  margin: var(--space-5) 0;
+  max-width: 460px;
+}
+
+.hero__search-hint {
+  font-size: var(--fs-xs) !important;
+  color: var(--color-ink-faint) !important;
+  margin: var(--space-2) 0 0 !important;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Search-preview mock: grounded visual instead of a stock hero photo */
+.search-preview {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.search-preview__field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+.search-preview__field svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--color-ink-faint);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.search-preview__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.search-preview__row:last-child { border-bottom: none; }
+
+.search-preview__thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-bg-alt);
+}
+
+.search-preview__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-preview__info strong {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.search-preview__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--color-brand-dark);
+  white-space: nowrap;
+}
+
+/* ---------- Categories ---------- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Product/vendor grids, "How it works" steps, and "Why" cards moved to
+   css/components.css — marketplace, product, vendors, and vendor-store
+   all need them too, not just this page. */
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero__copy h1 { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .hero__actions { flex-wrap: wrap; }
+  .hero__actions .btn { flex: 1 1 150px; }
+}

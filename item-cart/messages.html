@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Messages — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/messages.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <div class="container chat-shell">
+
+      <p class="loading-state" id="chat-loading" role="status">Loading your messages…</p>
+
+      <div class="empty-state" id="chat-setup" style="display:none;">
+        <h1>Messages aren't available yet.</h1>
+        <p>Please check back soon.</p>
+        <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+      </div>
+
+      <!-- Offer browser notifications (never asked automatically) -->
+      <div class="notify-offer" id="notify-offer" style="display:none;">
+        <p>Get a notification when you receive a message while Item cart is open in your browser.</p>
+        <div class="notify-offer__actions">
+          <button type="button" class="btn btn-primary btn-sm" id="notify-yes">Turn on notifications</button>
+          <button type="button" class="btn btn-outline btn-sm" id="notify-no">Not now</button>
+        </div>
+      </div>
+
+      <!-- Inbox -->
+      <section id="inbox-view" style="display:none;">
+        <h1>Messages</h1>
+        <div class="chat-modes" id="chat-modes" role="tablist" aria-label="Inbox" style="display:none;"></div>
+        <div class="form-submit-error" id="inbox-error" role="alert"></div>
+        <div class="conversation-list" id="conversation-list"></div>
+      </section>
+
+      <!-- Conversation -->
+      <section id="thread-view" class="thread" style="display:none;">
+        <div class="thread__head">
+          <button type="button" class="thread__back" id="thread-back" aria-label="Back to messages">&larr;</button>
+          <div class="chat-avatar" id="thread-avatar" aria-hidden="true"></div>
+          <h2 id="thread-title"></h2>
+        </div>
+
+        <p class="thread__safety">Keep chats and payments on Item cart. Phone numbers are hidden automatically.</p>
+
+        <div class="thread__messages" id="thread-messages" role="log" aria-live="polite" aria-label="Conversation"></div>
+
+        <!-- Shown while the other person is typing. Its space is always reserved, so nothing jumps. -->
+        <div class="thread__typing" id="thread-typing">
+          <span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="thread__typing-text" id="thread-typing-text"></span>
+        </div>
+
+        <form class="composer" id="composer" novalidate>
+          <p class="composer__warning" id="composer-warning" style="display:none;">That looks like a phone number. It will be hidden when you send.</p>
+          <!-- Only shown in the chat with Item cart Admin: lets a customer attach their bank-transfer receipt. -->
+          <div class="composer__attach-row" id="composer-attach-row" style="display:none;">
+            <input type="file" id="composer-file" accept="image/*" hidden />
+            <button type="button" class="btn btn-outline btn-sm" id="composer-attach">Attach receipt photo</button>
+            <span class="composer__attachment-name" id="composer-attachment-name"></span>
+            <button type="button" class="composer__attachment-remove" id="composer-attachment-remove" style="display:none;" aria-label="Remove photo">&times;</button>
+          </div>
+          <div class="composer__row">
+            <label for="composer-input" class="visually-hidden">Message</label>
+            <textarea id="composer-input" rows="1" maxlength="1000" placeholder="Write a message"></textarea>
+            <button type="submit" class="btn btn-primary" id="composer-send">Send</button>
+          </div>
+          <div class="form-submit-error" id="composer-error" role="alert"></div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/messages.js"></script>
+</body>
+</html>

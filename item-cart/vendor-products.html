@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Manage products — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/vendor-products.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="listing-header">
+      <div class="container">
+        <h1>Manage products</h1>
+        <p id="vp-lead">Item cart reviews new products and every change before it goes live.</p>
+      </div>
+    </section>
+
+    <section class="listing-results">
+      <div class="container">
+
+        <p class="loading-state" id="vp-loading" role="status">Loading your products…</p>
+
+        <div class="empty-state" id="vp-setup" style="display:none;">
+          <h2>Product posting isn't available yet.</h2>
+          <p>Please check back soon.</p>
+          <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+        </div>
+
+        <div class="empty-state" id="vp-notvendor" style="display:none;">
+          <h2>Your account isn't linked to a store yet.</h2>
+          <p>Once Item cart links your account to your store, you can post products here. Applied already? We'll let you know when it's done.</p>
+          <a href="account.html" class="btn btn-primary btn-sm">Back to my account</a>
+        </div>
+
+        <div id="vp-app" style="display:none;">
+          <div class="filter-chips" id="vp-stores" role="group" aria-label="Your stores" style="display:none;"></div>
+
+          <div class="vp-notice" role="note">
+            New products and every edit are reviewed by Item cart before they appear in the shop. The shop keeps showing the current version of a live product until your edit is approved. You can pause a live product at any time.
+          </div>
+
+          <div class="vp-notice" id="vp-service-note" role="note" style="display:none;">
+            Your store is listed under Services, so customers don't add your products to a cart. They tap Contact Vendor and message you to agree the details and price.
+          </div>
+
+          <div class="form-submit-error" id="vp-error" role="alert"></div>
+
+          <div class="listing-controls">
+            <p class="results-count" id="vp-count" aria-live="polite"></p>
+            <div class="listing-controls__tools">
+              <button type="button" class="btn btn-primary" id="vp-add">Add product</button>
+            </div>
+          </div>
+
+          <div class="filter-chips vp-filters" id="vp-filters" role="group" aria-label="Filter products"></div>
+
+          <div class="vp-list" id="vp-list"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <!-- Add / edit -->
+  <dialog id="vp-dialog" class="vp-dialog" aria-labelledby="vp-dialog-title">
+    <form id="vp-form" novalidate></form>
+  </dialog>
+
+  <!-- Confirm -->
+  <dialog id="vp-confirm" class="vp-dialog vp-dialog--small" aria-labelledby="vp-confirm-title">
+    <h2 id="vp-confirm-title"></h2>
+    <p id="vp-confirm-body"></p>
+    <div class="vp-dialog__actions">
+      <button type="button" class="btn btn-outline" id="vp-confirm-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="vp-confirm-ok">Confirm</button>
+    </div>
+  </dialog>
+
+  <div class="vp-toast" id="vp-toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="js/pages/vendor-products.js"></script>
+</body>
+</html>

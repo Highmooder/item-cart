@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <title>Marketplace — Item cart</title>
+  <meta name="description" content="Search and browse products from vendors around your campus on Item cart." />
+  <meta property="og:site_name" content="Item cart" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Marketplace — Item cart" />
+  <meta property="og:description" content="Search and browse products from vendors around your campus on Item cart." />
+  <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="listing-header">
+      <div class="container">
+        <h1>Marketplace</h1>
+        <p>Search or filter to find products from vendors around UNIOSUN.</p>
+      </div>
+    </section>
+
+    <section class="listing-toolbar">
+      <div class="container">
+        <form class="search-bar" id="marketplace-search-form" role="search">
+          <label for="marketplace-search-input" class="visually-hidden">Search products</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="search"
+            id="marketplace-search-input"
+            name="q"
+            placeholder="Search products"
+            autocomplete="off"
+          />
+          <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+
+        <div class="filter-chips" id="category-filters" role="group" aria-label="Filter by category"></div>
+
+        <div class="listing-controls">
+          <p class="results-count" id="results-count" aria-live="polite"></p>
+          <div class="listing-controls__tools">
+            <div class="sort-control">
+              <label for="sort-select">Sort by</label>
+              <select id="sort-select" aria-label="Sort products"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="listing-results">
+      <div class="container">
+        <div class="product-grid" id="marketplace-grid">
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+          <div class="skeleton-card" aria-hidden="true"></div>
+        </div>
+
+        <div class="empty-state" id="marketplace-empty" style="display:none;">
+          <h2>We couldn't find what you're looking for.</h2>
+          <p>Try a different search term, or browse by category instead.</p>
+          <button type="button" class="btn btn-outline btn-sm" id="reset-filters">Clear filters</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/marketplace.js"></script>
+</body>
+</html>

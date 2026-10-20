@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Account — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/confirmation.css" />
+  <link rel="stylesheet" href="css/pages/account.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- Loading -->
+      <p class="loading-state" id="account-loading" role="status">Loading your account…</p>
+
+      <!-- Supabase not connected -->
+      <div class="empty-state" id="setup-view" style="display:none;">
+        <h1>Accounts aren't available yet.</h1>
+        <p>Please check back soon.</p>
+        <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+      </div>
+
+      <!-- Signed out: sign in / create account -->
+      <section class="account-card" id="auth-view" style="display:none;">
+        <h1>Your Item cart account</h1>
+        <p class="account-card__lead">Keep every order in one place, on any device.</p>
+
+        <div class="account-tabs" role="tablist" aria-label="Account options">
+          <button type="button" role="tab" id="tab-signin" aria-controls="signin-panel" aria-selected="true" data-auth-tab="signin">Sign in</button>
+          <button type="button" role="tab" id="tab-signup" aria-controls="signup-panel" aria-selected="false" data-auth-tab="signup">Create account</button>
+        </div>
+
+        <div role="tabpanel" id="signin-panel" aria-labelledby="tab-signin">
+          <form id="signin-form" novalidate>
+            <div class="form-group">
+              <label for="signin-email">Email</label>
+              <input type="email" id="signin-email" autocomplete="username" />
+              <span class="field-error" id="signin-email-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="signin-password">Password</label>
+              <input type="password" id="signin-password" autocomplete="current-password" />
+              <span class="field-error" id="signin-password-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="signin-submit">Sign in</button>
+            <div class="form-submit-error" id="signin-error" role="alert"></div>
+            <button type="button" class="link-btn" id="forgot-btn">Forgot your password?</button>
+          </form>
+
+          <form id="reset-form" novalidate style="display:none;">
+            <p>Enter your email and we'll send you a link to choose a new password.</p>
+            <div class="form-group">
+              <label for="reset-email">Email</label>
+              <input type="email" id="reset-email" autocomplete="email" />
+              <span class="field-error" id="reset-email-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="reset-submit">Send reset link</button>
+            <div class="form-submit-error" id="reset-error" role="alert"></div>
+            <p class="account-note" id="reset-sent" style="display:none;">If an account exists for that email, a reset link is on its way.</p>
+            <button type="button" class="link-btn" id="reset-back">Back to sign in</button>
+          </form>
+        </div>
+
+        <div role="tabpanel" id="signup-panel" aria-labelledby="tab-signup" hidden>
+          <form id="signup-form" novalidate>
+            <div class="form-group">
+              <label for="signup-name">Full name</label>
+              <input type="text" id="signup-name" autocomplete="name" />
+              <span class="field-error" id="signup-name-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="signup-phone">Phone number</label>
+              <input type="tel" id="signup-phone" autocomplete="tel" placeholder="080..." />
+              <span class="field-error" id="signup-phone-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="signup-email">Email</label>
+              <input type="email" id="signup-email" autocomplete="email" />
+              <span class="field-error" id="signup-email-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" autocomplete="new-password" />
+              <span class="form-hint">At least 8 characters.</span>
+              <span class="field-error" id="signup-password-error"></span>
+            </div>
+            <p class="form-consent">By creating an account you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+            <button type="submit" class="btn btn-primary btn-block" id="signup-submit">Create account</button>
+            <div class="form-submit-error" id="signup-error" role="alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Signed up, waiting for the email link -->
+      <section class="account-card" id="confirm-view" style="display:none;">
+        <h1>Check your email</h1>
+        <p>We sent a confirmation link to <strong id="confirm-email"></strong>. Open it to finish creating your account.</p>
+        <p class="account-note">Your order from this device will be added to your account automatically once you're in.</p>
+        <button type="button" class="btn btn-outline" id="confirm-back">Back to sign in</button>
+      </section>
+
+      <!-- Reset password (arrived from the email link) -->
+      <section class="account-card" id="recovery-view" style="display:none;">
+        <h1>Choose a new password</h1>
+        <form id="recovery-form" novalidate>
+          <div class="form-group">
+            <label for="recovery-password">New password</label>
+            <input type="password" id="recovery-password" autocomplete="new-password" />
+            <span class="form-hint">At least 8 characters.</span>
+            <span class="field-error" id="recovery-password-error"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="recovery-submit">Save password</button>
+          <div class="form-submit-error" id="recovery-error" role="alert"></div>
+        </form>
+      </section>
+
+      <!-- Signed in -->
+      <section id="dashboard-view" style="display:none;">
+        <div class="account-head">
+          <div>
+            <h1 id="account-greeting">Your account</h1>
+            <p id="account-email" class="account-head__email"></p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="signout-btn">Sign out</button>
+        </div>
+
+        <div class="account-banner" id="account-banner" role="status" style="display:none;"></div>
+
+        <section class="account-section">
+          <div class="section-head"><div><h2>Messages</h2></div></div>
+          <div class="account-links" id="account-messages"></div>
+        </section>
+
+        <section class="account-section">
+          <div class="section-head"><div><h2>Your orders</h2></div></div>
+          <div id="account-orders" class="order-card-list"></div>
+        </section>
+
+        <section class="account-section">
+          <div class="section-head"><div><h2>Your details</h2></div></div>
+          <form id="profile-form" class="account-card account-card--flat" novalidate>
+            <div class="form-group">
+              <label for="profile-name">Full name</label>
+              <input type="text" id="profile-name" autocomplete="name" />
+              <span class="field-error" id="profile-name-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="profile-phone">Phone number</label>
+              <input type="tel" id="profile-phone" autocomplete="tel" />
+              <span class="field-error" id="profile-phone-error"></span>
+            </div>
+            <p class="form-hint">We use these to fill in checkout for you.</p>
+            <button type="submit" class="btn btn-primary" id="profile-submit">Save details</button>
+            <div class="form-submit-error" id="profile-error" role="alert"></div>
+            <p class="account-note" id="profile-saved" style="display:none;">Saved.</p>
+          </form>
+        </section>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/account.js"></script>
+</body>
+</html>

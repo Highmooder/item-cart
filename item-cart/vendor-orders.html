@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Orders — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/vendor-products.css" />
+  <link rel="stylesheet" href="css/pages/vendor-orders.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <section class="listing-header">
+      <div class="container">
+        <h1>Orders</h1>
+        <p id="vo-lead">Paid orders for your store. Tap Ready when an order is packed.</p>
+      </div>
+    </section>
+
+    <section class="listing-results">
+      <div class="container">
+
+        <p class="loading-state" id="vo-loading" role="status">Loading your orders…</p>
+
+        <div class="empty-state" id="vo-setup" style="display:none;">
+          <h2>Orders aren't available yet.</h2>
+          <p>Please check back soon.</p>
+          <a href="marketplace.html" class="btn btn-primary btn-sm">Explore Marketplace</a>
+        </div>
+
+        <div class="empty-state" id="vo-notvendor" style="display:none;">
+          <h2>Your account isn't linked to a store yet.</h2>
+          <p>Once Item cart links your account to your store, your orders appear here. Applied already? We'll let you know when it's done.</p>
+          <a href="account.html" class="btn btn-primary btn-sm">Back to my account</a>
+        </div>
+
+        <div id="vo-app" style="display:none;">
+          <div class="filter-chips" id="vo-stores" role="group" aria-label="Your stores" style="display:none;"></div>
+
+          <div class="vp-notice" role="note">
+            You only see orders Item cart has confirmed as paid, so it is safe to start preparing them. To agree where and when to hand over an order, message the customer from here. Phone numbers stay hidden in chat.
+          </div>
+
+          <div class="form-submit-error" id="vo-error" role="alert"></div>
+
+          <div class="listing-controls">
+            <p class="results-count" id="vo-count" aria-live="polite"></p>
+            <div class="listing-controls__tools">
+              <button type="button" class="btn btn-outline" id="vo-refresh">Refresh</button>
+            </div>
+          </div>
+
+          <div class="filter-chips vp-filters" id="vo-filters" role="group" aria-label="Filter orders"></div>
+
+          <div class="vo-list" id="vo-list"></div>
+
+          <p class="vo-links" id="vo-links"></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <!-- Confirm -->
+  <dialog id="vo-confirm" class="vp-dialog vp-dialog--small" aria-labelledby="vo-confirm-title">
+    <h2 id="vo-confirm-title"></h2>
+    <p id="vo-confirm-body"></p>
+    <div class="vp-dialog__actions">
+      <button type="button" class="btn btn-outline" id="vo-confirm-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="vo-confirm-ok">Confirm</button>
+    </div>
+  </dialog>
+
+  <div class="vp-toast" id="vo-toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="js/pages/vendor-orders.js"></script>
+</body>
+</html>

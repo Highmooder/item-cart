@@ -1,0 +1,1296 @@
+/* ============================================
+   ITEM CART — COMPONENTS
+   Header/nav, buttons, cards, badges, footer.
+   Shared across every page.
+   ============================================ */
+
+/* ---------- Header / Nav ---------- */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: var(--space-3);
+  z-index: 100;
+  background: var(--color-brand-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: top 120ms ease;
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav-bar {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  color: var(--color-brand-dark);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+  white-space: nowrap; /* "Item cart" is two words: never let it wrap */
+}
+
+.logo span {
+  color: var(--color-accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.nav-links a {
+  color: var(--color-ink-soft);
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--color-brand-dark);
+  border-bottom-color: var(--color-brand);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.icon-btn:hover {
+  background: var(--color-bg-alt);
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+/* display:flex above would otherwise override the hidden attribute */
+.cart-count[hidden] {
+  display: none;
+}
+
+.nav-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: var(--fs-xs);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.nav-toggle {
+  display: none;
+  border: none;
+  background: none;
+  width: 40px;
+  height: 40px;
+}
+
+.nav-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-ink);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  min-height: var(--control-h);
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--color-brand-dark); }
+
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-accent:hover { background: var(--color-accent-dark); }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+}
+.btn-outline:hover { border-color: var(--color-brand); color: var(--color-brand-dark); }
+
+.btn-block { width: 100%; }
+.btn-sm { min-height: 36px; padding: 0 var(--space-4); }
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Badges / tags ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+}
+
+.badge-accent {
+  background: var(--color-accent-tint);
+  color: var(--color-accent-dark);
+}
+
+.badge-outline {
+  background: transparent;
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-ink-soft);
+}
+
+.badge-danger {
+  background: var(--color-danger-tint);
+  color: var(--color-danger);
+}
+
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+}
+.badge-verified svg {
+  width: 13px;
+  height: 13px;
+  stroke: none;
+  fill: currentColor;
+}
+
+.inline-icon {
+  display: inline-flex;
+  vertical-align: -2px;
+}
+.inline-icon svg {
+  width: 13px;
+  height: 13px;
+  stroke: none;
+  fill: var(--color-brand-dark);
+}
+
+.form-submit-error {
+  display: none;
+  background: var(--color-danger-tint);
+  color: var(--color-danger);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-4);
+}
+
+/* ---------- Forms ---------- */
+/* Shared by checkout.html and become-vendor.html — kept here (not in
+   either page's own CSS) so every page with a form actually gets it. */
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-group label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.form-group select {
+  appearance: auto;
+}
+
+.form-group input.has-error,
+.form-group textarea.has-error,
+.form-group select.has-error {
+  border-color: var(--color-danger);
+}
+
+.field-error {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--color-danger);
+  margin-top: 4px;
+  min-height: 14px;
+}
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+}
+
+.form-fieldset legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+}
+
+/* ---------- Quantity stepper ---------- */
+/* Shared by the product detail page and the cart page. */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.qty-stepper button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: var(--color-bg-alt);
+  font-size: var(--fs-md);
+  color: var(--color-ink);
+}
+
+.qty-stepper button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty-stepper span {
+  min-width: 36px;
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.rating svg {
+  width: 13px;
+  height: 13px;
+  fill: var(--color-accent);
+  stroke: none;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+/* Product and vendor cards share one structure: media, then a body whose
+   last row (buttons) always sits at the bottom, so cards in a row line up.
+   No shadows: hover only darkens the border. */
+.product-card,
+.vendor-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 120ms ease;
+}
+
+.product-card:hover,
+.vendor-card:hover {
+  border-color: var(--color-ink-faint);
+}
+
+.product-card__media,
+.vendor-card__media {
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+
+.vendor-card__media {
+  aspect-ratio: 16 / 9;
+}
+
+.product-card__media img,
+.vendor-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__body,
+.vendor-card__body {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.product-card__top-row,
+.vendor-card__top-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  line-height: 1.3;
+  margin: 0;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.product-card__name:hover {
+  color: var(--color-brand-dark);
+  text-decoration: underline;
+}
+
+/* vendor name on the left, rating on the right; a long vendor name wraps
+   onto a second line rather than being cut off or pushing the rating out */
+.product-card__meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.product-card__vendor {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.35;
+  color: var(--color-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.product-card__meta .rating {
+  flex-shrink: 0;
+  line-height: 1.35;
+}
+
+.product-card__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  color: var(--color-brand-dark);
+}
+
+/* Card buttons. The layout depends on the CARD's width (not the screen's),
+   and every card in a row has the same width, so neighbouring cards always
+   match: two buttons side by side when the card is wide enough, otherwise
+   stacked at full width. Labels never wrap onto a second line. */
+.product-card,
+.vendor-card {
+  container-type: inline-size;
+}
+
+.product-card__footer,
+.vendor-card__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.product-card__footer .btn,
+.vendor-card__actions .btn {
+  padding-inline: var(--space-3);
+  white-space: nowrap;
+}
+
+@container (min-width: 300px) {
+  .product-card__footer,
+  .vendor-card__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.vendor-card__top-row {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.vendor-card__top-row h3 {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--fs-md);
+  overflow-wrap: anywhere;
+}
+
+.vendor-card__top-row .rating {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.vendor-card__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-alt);
+}
+
+/* badges on one row; location and product count each get their own line,
+   so every vendor card has the same three-part shape */
+.vendor-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.vendor-card__meta {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vendor-card__meta li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  line-height: 1.4;
+  min-width: 0;
+}
+
+.vendor-card__meta li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* icons are plain outlines, not solid shapes */
+.vendor-card__meta svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+
+@media (min-width: 641px) {
+  .product-card__body,
+  .vendor-card__body {
+    padding: var(--space-4);
+  }
+}
+
+/* ---------- Category chips ---------- */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  text-align: left;
+  width: 100%;
+}
+
+.category-card:hover {
+  border-color: var(--color-brand);
+  background: var(--color-brand-tint);
+}
+
+.category-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-dark);
+}
+
+.category-card__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+.category-card__name {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+}
+
+/* ---------- Search bar ---------- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: calc(var(--control-h) + 8px);
+  padding: 3px 3px 3px var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+}
+
+.search-bar:focus-within {
+  border-color: var(--color-brand);
+  outline: 2px solid var(--color-brand);
+  outline-offset: -1px;
+}
+
+.search-bar input {
+  flex: 1;
+  min-width: 0; /* lets the box shrink on very narrow phones instead of pushing the page sideways */
+  align-self: stretch;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.search-bar input::placeholder {
+  color: var(--color-ink-faint);
+  text-overflow: ellipsis;
+}
+
+.search-bar svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--color-ink-faint);
+  fill: none;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+.search-bar .btn {
+  flex-shrink: 0;
+  min-height: var(--control-h);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--color-brand-dark);
+  color: #E7EFEA;
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.site-footer .logo { color: #fff; }
+.site-footer .logo span { color: var(--color-accent); }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-grid p {
+  color: #B7C7BE;
+  font-size: var(--fs-sm);
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-size: var(--fs-sm);
+  text-transform: none;
+  margin-bottom: var(--space-3);
+}
+
+.footer-col ul li {
+  margin-bottom: var(--space-2);
+}
+
+.footer-col a {
+  color: #B7C7BE;
+  font-size: var(--fs-sm);
+}
+
+.footer-col a:hover { color: #fff; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  font-size: var(--fs-xs);
+  color: #94A79C;
+}
+
+/* ---------- Filter chips ---------- */
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  min-height: var(--control-h);
+  padding: 0 var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  flex-shrink: 0;
+}
+
+.filter-chip:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand-dark);
+}
+
+.filter-chip.is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+
+/* ---------- Shared grids ---------- */
+/* Used by home, marketplace, product (related items), vendors, and
+   vendor-store — kept here (not in a single page's CSS) so every page
+   that renders a product or vendor grid actually gets the layout. */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+/* Phones: two product cards per row (one on very narrow screens). */
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .vendor-grid {
+    gap: var(--space-3);
+  }
+}
+
+/* ---------- Steps (How it works) ---------- */
+/* Used on the homepage and the Become a Vendor page. */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.step__index {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.step__index::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-line-strong);
+  margin-top: var(--space-3);
+}
+
+/* ---------- Benefit / "why" cards ---------- */
+/* Used on the homepage ("Why Item cart") and Become a Vendor ("Why sell on Item cart"). */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+.why-item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.why-item__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-item__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+.why-item h3 { margin-bottom: var(--space-1); }
+.why-item p { margin: 0; font-size: var(--fs-sm); }
+
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; gap: var(--space-5); }
+  .why-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Placeholder / stub page ---------- */
+.stub-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.stub-page__inner {
+  max-width: 480px;
+}
+
+.stub-page__badge {
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- Empty / no-results states ---------- */
+.empty-state {
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+  border: 1px dashed var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.empty-state h1,
+.empty-state h2,
+.empty-state h3 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+/* ---------- Responsive: mobile nav ---------- */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+
+  /* The open menu: big, full-width rows that are easy to hit with a thumb.
+     (The links used to be inline, so their padding added no height and the
+     dividers were drawn through the text.) */
+  .nav-links.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-2) var(--space-4) var(--space-4);
+    max-height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .nav-links.is-open li + li {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .nav-links.is-open a {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 0 var(--space-3);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: var(--color-ink);
+    border-bottom: none;
+    border-radius: var(--radius-sm);
+  }
+
+  /* a small arrow on the right says "tap to go" */
+  .nav-links.is-open a::after {
+    content: "";
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-top: 2px solid var(--color-ink-faint);
+    border-right: 2px solid var(--color-ink-faint);
+    transform: rotate(45deg);
+  }
+
+  .nav-links.is-open a:hover,
+  .nav-links.is-open a:active {
+    background: var(--color-bg-alt);
+    border-bottom: none;
+  }
+
+  .nav-links.is-open a[aria-current="page"] {
+    background: var(--color-brand-tint);
+    color: var(--color-brand-dark);
+    border-bottom: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Unread count next to the "Messages" menu link ---------- */
+.nav-pill {
+  display: inline-block;
+  margin-left: 6px;
+  min-width: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ---------- Install the app ---------- */
+/* The "Install app" row in the phone menu. Desktop has the footer link instead.
+   It stays hidden until the browser says Item cart can be installed (see pwa.js). */
+.nav-install {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav-install:not([hidden]) {
+    display: block;
+  }
+}
+
+/* The iPhone / iPad "Add to Home Screen" steps */
+.install-dialog {
+  width: min(92vw, 380px);
+  padding: var(--space-5);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-md);
+}
+
+.install-dialog::backdrop {
+  background: rgba(19, 61, 41, 0.45);
+}
+
+.install-dialog h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-lg);
+}
+
+.install-dialog ol {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-5);
+  color: var(--color-ink-soft);
+  list-style: decimal;
+}
+
+.install-dialog__icon svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: text-bottom;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.install-dialog .btn {
+  width: 100%;
+}
+
+/* Very narrow phones: the Messages icon needs the room, and Search is in the menu too. */
+@media (max-width: 380px) {
+  .nav-search {
+    display: none;
+  }
+}
+
+/* ---------- Listing pages: Marketplace and Vendors ---------- */
+/* One set of components for both pages: header, search bar, category chips,
+   sort control and results. Every section sets its own vertical padding
+   (the global `section` rule is far larger) and the toolbar spaces its
+   children with `gap`, so nothing touches or overlaps. */
+.listing-header {
+  padding-block: var(--space-6) var(--space-5);
+}
+
+.listing-header h1 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.listing-header p {
+  margin: 0;
+  font-size: var(--fs-base);
+  text-wrap: pretty;
+}
+
+.listing-toolbar {
+  padding-block: 0 var(--space-5);
+}
+
+.listing-toolbar > .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.listing-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+}
+
+.listing-controls__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.results-count {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.sort-control select {
+  min-height: var(--control-h);
+  padding: 0 36px 0 var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%234E5A54' stroke-width='1.6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sort-control select:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: -1px;
+  border-color: var(--color-brand);
+}
+
+.listing-results {
+  padding-block: 0 var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .listing-header {
+    padding-block: var(--space-5) var(--space-4);
+  }
+
+  .listing-header h1 {
+    font-size: var(--fs-xl);
+  }
+
+  .listing-toolbar {
+    padding-block: 0 var(--space-4);
+  }
+
+  .listing-results {
+    padding-block: 0 var(--space-7);
+  }
+
+  /* one scrolling row of chips that runs to the screen edge, so a chip
+     cut off at the edge reads as "scroll for more", not as a mistake */
+  .filter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--space-4) * -1);
+    padding-inline: var(--space-4);
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .filter-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .listing-controls__tools {
+    width: 100%;
+  }
+
+  .sort-control {
+    flex: 1;
+  }
+
+  .sort-control select {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ---------- Touch targets ---------- */
+/* On phones and tablets every control gets at least a 44px tap area
+   (the size Apple and Google recommend). Buttons, chips, search boxes and
+   selects all read --control-h, so one change keeps them lined up. */
+@media (max-width: 640px), (pointer: coarse) {
+  :root {
+    --control-h: 44px;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .icon-btn,
+  .nav-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav-actions {
+    gap: var(--space-1);
+  }
+
+  .btn-sm {
+    min-height: 44px;
+  }
+
+  .qty-stepper button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-group input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  .form-group textarea,
+  .form-group select {
+    min-height: 48px;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 0;
+  }
+
+  .footer-col a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-bar {
+    gap: var(--space-2);
+  }
+}
+
+/* ---------- Spam trap and consent lines ---------- */
+/* A form box that real people never see (it sits far off-screen and can't be
+   tabbed to). Bots fill every box they find, which gives them away. */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-consent {
+  margin: var(--space-3) 0;
+  font-size: var(--fs-xs);
+  color: var(--color-ink-soft);
+}
+
+.form-consent a {
+  color: var(--color-brand);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Footer links to the legal pages: roomy enough to tap on a phone */
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.footer-legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #B7C7BE;
+  text-decoration: underline;
+}
+
+.footer-legal a:hover {
+  color: #fff;
+}

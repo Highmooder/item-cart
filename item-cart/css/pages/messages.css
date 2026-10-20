@@ -1,0 +1,474 @@
+/* ============================================
+   MESSAGES — inbox and conversation
+   Uses the shared tokens in variables.css.
+   ============================================ */
+
+.chat-shell {
+  padding-block: var(--space-6);
+  max-width: 760px;
+}
+
+
+/* ---------- Inbox ---------- */
+.chat-modes {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-1);
+}
+
+.chat-modes button {
+  flex: none;
+  padding: 8px 16px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.chat-modes button[aria-selected="true"] {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+
+.conversation-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.conversation {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: var(--space-3);
+  align-items: center;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+}
+
+.conversation:hover {
+  border-color: var(--color-brand);
+}
+
+/* Grid children default to min-width:auto, which lets a long preview
+   stretch the whole row. min-width:0 lets the text truncate instead. */
+.conversation > span:nth-child(2) {
+  min-width: 0;
+}
+
+.chat-avatar {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.chat-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conversation__name {
+  display: block;
+  font-weight: 600;
+}
+
+.conversation__preview {
+  display: block;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation--unread .conversation__name,
+.conversation--unread .conversation__preview {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+/* Ticks in the inbox list: one = sent, two = seen. */
+.conversation__ticks {
+  display: inline-flex;
+  margin-right: 4px;
+  vertical-align: middle;
+  color: var(--color-ink-faint);
+}
+
+.conversation__ticks--seen {
+  color: var(--color-brand);
+}
+
+/* Unread count on an inbox tab */
+.chat-modes button .conversation__badge {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.conversation__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-faint);
+}
+
+.conversation__badge {
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- Thread ---------- */
+.thread__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.thread__head h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  overflow-wrap: anywhere;
+}
+
+.thread__back {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  background: var(--color-surface);
+  font-size: var(--fs-md);
+  color: var(--color-ink);
+}
+
+.thread__safety {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.thread__messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: min(55dvh, 520px);
+  min-height: 240px;
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.thread__empty {
+  margin: auto;
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: var(--fs-sm);
+  max-width: 28ch;
+}
+
+/* Date divider between days */
+.thread__day {
+  align-self: center;
+  margin: var(--space-2) 0;
+  padding: 2px var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.bubble {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bubble--mine {
+  align-self: flex-end;
+  background: var(--color-brand);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.bubble--theirs {
+  align-self: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-bottom-left-radius: 4px;
+}
+
+/* A message straight after another from the same person sits closer to it. */
+.bubble--stacked {
+  margin-top: calc(var(--space-1) * -1);
+}
+
+.bubble--mine.bubble--stacked {
+  border-top-right-radius: 4px;
+}
+
+.bubble--theirs.bubble--stacked {
+  border-top-left-radius: 4px;
+}
+
+.bubble__time {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Your own messages: time on the right, then the tick(s). */
+.bubble--mine .bubble__time {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  opacity: 1;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bubble__ticks {
+  display: inline-flex;
+}
+
+.bubble__ticks svg,
+.conversation__ticks svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bubble__ticks--seen {
+  color: var(--color-seen);
+}
+
+.bubble__notice {
+  align-self: flex-end;
+  max-width: 82%;
+  margin: -2px 0 var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-soft);
+  text-align: right;
+}
+
+/* ---------- "Is typing" row ---------- */
+/* Its height is always reserved, so the dots appearing never move the page. */
+.thread__typing {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 30px;
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-soft);
+  visibility: hidden;
+}
+
+.thread__typing.is-visible {
+  visibility: visible;
+}
+
+.thread__typing-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.typing-dots {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  border-bottom-left-radius: 4px;
+}
+
+.typing-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-ink-faint);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-dots i {
+    animation: none;
+    opacity: 0.8;
+  }
+}
+
+/* ---------- Composer ---------- */
+.composer {
+  margin-top: 0;
+}
+
+.composer__row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+
+.composer textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 140px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  resize: none;
+}
+
+/* Receipt photo (chat with Item cart Admin) */
+.composer__attach-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  min-width: 0;
+}
+
+.composer__attachment-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-xs);
+  color: var(--color-ink-soft);
+}
+
+.composer__attachment-remove {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  background: var(--color-surface);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-ink-soft);
+}
+
+.bubble__image-link {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.bubble__image {
+  display: block;
+  max-width: 100%;
+  width: 220px;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--color-line);
+}
+
+.composer__warning {
+  margin: 0 0 var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-tint, #fdebd9);
+  color: var(--color-accent-dark, #a14a0f);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .bubble,
+  .bubble__notice {
+    max-width: 90%;
+  }
+}
+
+/* ---------- Notification offer ---------- */
+.notify-offer {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-brand-tint);
+  color: var(--color-brand-dark);
+}
+
+.notify-offer p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.notify-offer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 640px), (pointer: coarse) {
+  .thread__back {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chat-modes button {
+    min-height: 44px;
+  }
+}

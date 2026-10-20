@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/admin.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="index.html" class="logo">Item <span>cart</span></a>
+      <div class="admin-header__right">
+        <span class="badge badge-outline">Admin</span>
+        <button type="button" class="btn btn-outline btn-sm" id="signout-btn" hidden>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Not configured -->
+    <section id="setup-view" hidden>
+      <div class="container admin-narrow">
+        <div class="card admin-panel">
+          <h1>Connect Supabase first</h1>
+          <p>Open <code>js/data/supabaseConfig.js</code> and paste your project URL and anon key (Supabase → Project Settings → API). Then reload this page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sign in -->
+    <section id="auth-view" hidden>
+      <div class="container admin-narrow">
+        <div class="card admin-panel">
+          <h1>Admin sign in</h1>
+          <p>Only Item cart admins can manage vendors and products.</p>
+          <form id="login-form" novalidate>
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" autocomplete="username" required />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" autocomplete="current-password" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="login-submit">Sign in</button>
+            <div class="form-submit-error" id="login-error" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signed in, but not an admin -->
+    <section id="denied-view" hidden>
+      <div class="container admin-narrow">
+        <div class="card admin-panel">
+          <h1>This account isn't an admin</h1>
+          <p>You're signed in, but this account hasn't been added to the admins list. Add the user ID to the <code>admins</code> table in Supabase, or sign in with a different account.</p>
+          <button type="button" class="btn btn-outline" id="denied-signout">Sign out</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="app-view" hidden>
+      <div class="container">
+        <div class="admin-tabs" role="tablist" aria-label="Admin sections">
+          <button type="button" role="tab" id="tab-orders" aria-controls="panel-orders" aria-selected="true" data-tab="orders">Orders <span class="admin-tabs__count" id="count-orders"></span></button>
+          <button type="button" role="tab" id="tab-payouts" aria-controls="panel-payouts" aria-selected="false" data-tab="payouts">Payouts <span class="admin-tabs__count" id="count-payouts"></span></button>
+          <button type="button" role="tab" id="tab-approvals" aria-controls="panel-approvals" aria-selected="false" data-tab="approvals">Approvals <span class="admin-tabs__count" id="count-approvals"></span></button>
+          <button type="button" role="tab" id="tab-chats" aria-controls="panel-chats" aria-selected="false" data-tab="chats">Chats <span class="admin-tabs__count" id="count-chats"></span></button>
+          <button type="button" role="tab" id="tab-vendors" aria-controls="panel-vendors" aria-selected="false" data-tab="vendors">Vendors <span class="admin-tabs__count" id="count-vendors"></span></button>
+          <button type="button" role="tab" id="tab-products" aria-controls="panel-products" aria-selected="false" data-tab="products">Products <span class="admin-tabs__count" id="count-products"></span></button>
+          <button type="button" role="tab" id="tab-applications" aria-controls="panel-applications" aria-selected="false" data-tab="applications">Applications <span class="admin-tabs__count" id="count-applications"></span></button>
+        </div>
+
+        <div class="form-submit-error" id="load-error" role="alert"></div>
+
+        <div role="tabpanel" id="panel-orders" aria-labelledby="tab-orders">
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__field">
+              <label for="order-search" class="visually-hidden">Search orders</label>
+              <input type="search" id="order-search" placeholder="Search by order ID, name or phone" />
+            </div>
+            <div class="admin-toolbar__select">
+              <label for="order-filter" class="visually-hidden">Filter orders</label>
+              <select id="order-filter">
+                <option value="needs_check">Needs payment check</option>
+                <option value="all">All orders</option>
+                <option value="paid">Paid</option>
+                <option value="problem">Failed or refunded</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline" id="refresh-orders-btn">Refresh</button>
+          </div>
+          <div class="admin-list" id="order-list"></div>
+          <p class="form-hint" id="order-limit-note" hidden>Showing the 200 most recent orders.</p>
+        </div>
+
+        <div role="tabpanel" id="panel-payouts" aria-labelledby="tab-payouts" hidden>
+          <p class="form-hint chat-note">What each vendor is owed: completed orders on paid payments, minus what you have already paid them. Pay the vendor yourself, then record it here.</p>
+          <div class="payout-summary" id="payout-summary" hidden></div>
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__field">
+              <label for="payout-search" class="visually-hidden">Search vendors</label>
+              <input type="search" id="payout-search" placeholder="Search by store name" />
+            </div>
+            <div class="admin-toolbar__select">
+              <label for="payout-filter" class="visually-hidden">Filter vendors</label>
+              <select id="payout-filter">
+                <option value="owed">Owed now</option>
+                <option value="all">All vendors with orders</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline" id="refresh-payouts-btn">Refresh</button>
+          </div>
+          <div class="admin-list" id="payout-list"></div>
+        </div>
+
+        <div role="tabpanel" id="panel-approvals" aria-labelledby="tab-approvals" hidden>
+          <p class="form-hint chat-note">Products and edits that vendors have submitted. Nothing here is visible in the shop until you approve it.</p>
+          <div class="admin-list" id="approval-list"></div>
+        </div>
+
+        <div role="tabpanel" id="panel-chats" aria-labelledby="tab-chats" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__select">
+              <label for="chat-filter" class="visually-hidden">Filter flagged messages</label>
+              <select id="chat-filter">
+                <option value="needs_review">Needs review</option>
+                <option value="all">All flagged messages</option>
+              </select>
+            </div>
+          </div>
+          <p class="form-hint chat-note">Phone numbers are hidden from the other person automatically. Here you can see what was originally written.</p>
+          <div class="admin-list" id="chat-list"></div>
+        </div>
+
+        <div role="tabpanel" id="panel-vendors" aria-labelledby="tab-vendors" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__field">
+              <label for="vendor-search" class="visually-hidden">Search vendors</label>
+              <input type="search" id="vendor-search" placeholder="Search vendors" />
+            </div>
+            <button type="button" class="btn btn-primary" id="add-vendor-btn">Add vendor</button>
+          </div>
+          <div class="admin-list" id="vendor-list"></div>
+        </div>
+
+        <div role="tabpanel" id="panel-products" aria-labelledby="tab-products" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__field">
+              <label for="product-search" class="visually-hidden">Search products</label>
+              <input type="search" id="product-search" placeholder="Search products" />
+            </div>
+            <div class="admin-toolbar__select">
+              <label for="product-vendor-filter" class="visually-hidden">Filter by vendor</label>
+              <select id="product-vendor-filter"></select>
+            </div>
+            <button type="button" class="btn btn-primary" id="add-product-btn">Add product</button>
+          </div>
+          <div class="admin-list" id="product-list"></div>
+        </div>
+
+        <div role="tabpanel" id="panel-applications" aria-labelledby="tab-applications" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-toolbar__select">
+              <label for="application-filter" class="visually-hidden">Filter applications</label>
+              <select id="application-filter">
+                <option value="pending_review">Waiting for review</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="all">All applications</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-list" id="application-list"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Add / edit form -->
+  <dialog id="form-dialog" class="admin-dialog" aria-labelledby="form-dialog-title">
+    <form id="entity-form" novalidate></form>
+  </dialog>
+
+  <!-- Reject a vendor submission -->
+  <dialog id="reject-dialog" class="admin-dialog admin-dialog--small" aria-labelledby="reject-title">
+    <h2 id="reject-title"></h2>
+    <p>Tell the vendor what to fix. They will see this.</p>
+    <form id="reject-form" novalidate>
+      <div class="form-group">
+        <label for="reject-reason">Reason</label>
+        <textarea id="reject-reason" rows="3" maxlength="500"></textarea>
+        <span class="field-error" id="reject-reason-error"></span>
+      </div>
+      <div class="form-submit-error" id="reject-error" role="alert"></div>
+      <div class="admin-dialog__actions">
+        <button type="button" class="btn btn-outline" id="reject-cancel">Cancel</button>
+        <button type="submit" class="btn btn-danger-solid">Reject</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Vendor logins -->
+  <dialog id="accounts-dialog" class="admin-dialog" aria-labelledby="accounts-title">
+    <h2 id="accounts-title"></h2>
+    <p>These people can read and answer this store's messages. Each must first create a normal account on Item cart using the email you enter.</p>
+    <ul class="accounts-list" id="accounts-list"></ul>
+    <form id="accounts-form" novalidate>
+      <div class="form-group">
+        <label for="accounts-email">Link an account by email</label>
+        <input type="email" id="accounts-email" autocomplete="off" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Link account</button>
+      <div class="form-submit-error" id="accounts-error" role="alert"></div>
+    </form>
+    <div class="admin-dialog__actions">
+      <button type="button" class="btn btn-outline" data-accounts-close>Close</button>
+    </div>
+  </dialog>
+
+  <!-- Record a payout -->
+  <dialog id="payout-dialog" class="admin-dialog admin-dialog--small" aria-labelledby="payout-title">
+    <h2 id="payout-title"></h2>
+    <p id="payout-owed-text"></p>
+    <form id="payout-form" novalidate>
+      <div class="form-group">
+        <label for="payout-amount">Amount you paid (₦)</label>
+        <input type="number" id="payout-amount" min="1" step="1" inputmode="numeric" />
+        <span class="field-error" id="payout-amount-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="payout-note">Note (optional)</label>
+        <input type="text" id="payout-note" maxlength="300" placeholder="e.g. bank transfer ref, or cash" />
+      </div>
+      <div class="form-submit-error" id="payout-error" role="alert"></div>
+      <div class="admin-dialog__actions">
+        <button type="button" class="btn btn-outline" id="payout-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary">Record payout</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Payout history -->
+  <dialog id="payout-history-dialog" class="admin-dialog" aria-labelledby="payout-history-title">
+    <h2 id="payout-history-title"></h2>
+    <div id="payout-history-list"></div>
+    <div class="admin-dialog__actions">
+      <button type="button" class="btn btn-outline" data-payout-history-close>Close</button>
+    </div>
+  </dialog>
+
+  <!-- Order detail -->
+  <dialog id="order-dialog" class="admin-dialog admin-dialog--wide" aria-labelledby="order-dialog-title">
+    <div id="order-detail"></div>
+  </dialog>
+
+  <!-- Confirm remove / approve / reject -->
+  <dialog id="confirm-dialog" class="admin-dialog admin-dialog--small" aria-labelledby="confirm-title">
+    <h2 id="confirm-title"></h2>
+    <p id="confirm-body"></p>
+    <div class="admin-dialog__actions">
+      <button type="button" class="btn btn-outline" id="confirm-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="confirm-ok">Confirm</button>
+    </div>
+  </dialog>
+
+  <div class="admin-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="js/pages/admin.js"></script>
+</body>
+</html>

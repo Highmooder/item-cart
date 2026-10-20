@@ -1,0 +1,381 @@
+/* ============================================
+   ASK ITEM CART AI — chat panel
+   Loaded ONLY when someone taps the "Ask Item cart AI" button, so it costs
+   nothing on a normal page view. (The button's own few styles live in
+   js/modules/askLauncher.js.) Uses the shared tokens, buttons, badges
+   and chips.
+   Phone: a bottom sheet. Desktop: a card in the bottom-right corner.
+   ============================================ */
+
+.ask-panel {
+  position: fixed;
+  z-index: 60;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  height: min(86dvh, 640px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 32px rgba(19, 61, 41, 0.22);
+  overflow: hidden;
+  padding: 0; /* the site gives every <section> vertical padding; the panel is not a page section */
+}
+
+.ask-panel[hidden] {
+  display: none;
+}
+
+/* ---------- Header ---------- */
+.ask-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.ask-panel__head h2 {
+  margin: 0;
+  font-size: var(--fs-md);
+  color: #fff;
+}
+
+.ask-panel__head p {
+  margin: 2px 0 0;
+  font-size: var(--fs-sm);
+  color: #fff;
+  opacity: 0.88;
+}
+
+.ask-panel__tools {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.ask-panel__btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-sm, 8px);
+  background: transparent;
+  color: #fff;
+  font: 600 var(--fs-sm) var(--font-body);
+  cursor: pointer;
+}
+
+.ask-panel__btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.ask-panel__btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.ask-panel__btn--icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+}
+
+/* ---------- Conversation ---------- */
+.ask-panel__log {
+  position: relative; /* lets the page scroll a reply to the top */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-bg);
+}
+
+.ask-msg {
+  max-width: 88%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 16px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ask-msg--bot {
+  align-self: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-bottom-left-radius: 4px;
+  color: var(--color-ink);
+}
+
+.ask-msg--user {
+  align-self: flex-end;
+  background: var(--color-brand);
+  border-bottom-right-radius: 4px;
+  color: #fff;
+}
+
+.ask-msg--typing {
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+.ask-reply {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ---------- Result cards ---------- */
+.ask-cards {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ask-card {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.ask-card__img {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-bg-alt);
+}
+
+.ask-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ask-card__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.ask-card__name {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.ask-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 2px 0;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.ask-card__vendor {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.ask-card__labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-2);
+}
+
+.ask-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ask-card__actions .btn {
+  flex: 1 1 96px;
+  min-height: 44px;
+}
+
+/* ---------- Suggestions, input, small print ---------- */
+.ask-panel__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) 0;
+  background: var(--color-bg);
+}
+
+.ask-panel__chips[hidden] {
+  display: none;
+}
+
+.ask-panel__form {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+}
+
+.ask-panel__form input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: var(--fs-base) var(--font-body);
+}
+
+.ask-panel__form input:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.ask-panel__form .btn {
+  min-height: 48px;
+}
+
+.ask-panel__fine {
+  margin: 0;
+  padding: 0 var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+  background: var(--color-bg);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-faint);
+}
+
+/* ---------- Bigger screens: a card in the corner ---------- */
+@media (min-width: 641px) {
+  .ask-panel {
+    right: 24px;
+    bottom: 24px;
+    left: auto;
+    width: 400px;
+    height: min(600px, calc(100dvh - 48px));
+    border-radius: 20px;
+  }
+}
+
+/* ---------- Conversation: quick replies, comparison, listing answers ---------- */
+.ask-chiprow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.ask-chiprow .filter-chip {
+  min-height: 44px;
+}
+
+/* Comparison table: 2 to 3 products side by side */
+.ask-compare {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.ask-compare table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: var(--fs-sm);
+}
+
+.ask-compare th,
+.ask-compare td {
+  padding: var(--space-2) var(--space-2);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-line);
+  overflow-wrap: anywhere;
+}
+
+.ask-compare thead th a {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ask-compare tbody th {
+  width: 56px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.ask-compare tr:last-child th,
+.ask-compare tr:last-child td {
+  border-bottom: 0;
+}
+
+.ask-compare td.is-best {
+  background: var(--color-brand-tint);
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+/* The sentence from a listing that answers a question */
+.ask-quote {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--color-brand);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-surface);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+/* "Asking about: ..." tag above the message box */
+.ask-focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: 0 var(--space-4);
+  padding: var(--space-1) var(--space-2) var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-brand-tint);
+  color: var(--color-brand);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.ask-focus[hidden] {
+  display: none;
+}
+
+.ask-focus__end {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Three buttons on a result card: View, Add to Cart, Ask */
+.ask-card__actions .btn {
+  flex: 1 1 80px;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <meta name="robots" content="noindex" />
+  <title>Order Confirmation — Item cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/confirmation.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+    <div class="container">
+
+      <div class="loading-state" data-page-loading role="status">Loading your order…</div>
+
+      <div class="empty-state" id="confirmation-missing" style="display:none;">
+        <h1>We couldn't find that transaction.</h1>
+        <p>The link may be incorrect, or the phone number didn't match this order.</p>
+        <a href="marketplace.html" class="btn btn-primary btn-sm">Back to Marketplace</a>
+      </div>
+
+      <div id="confirmation-lookup" style="display:none; max-width:460px; margin-inline:auto;">
+        <h1>Find your order</h1>
+        <p>For your privacy, enter the phone number you used at checkout to see this order.</p>
+        <form id="lookup-form" novalidate>
+          <div class="form-group">
+            <label for="lookup-phone">Phone number</label>
+            <input type="tel" id="lookup-phone" autocomplete="tel" required />
+            <span class="field-error" id="lookup-error"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="lookup-submit">View my order</button>
+        </form>
+      </div>
+
+      <div id="confirmation-found" style="display:none;">
+        <div class="confirmation-header">
+          <span class="badge">Order received!</span>
+          <h1>Thank you — your order is with Item cart.</h1>
+          <p>Item cart has recorded your order as one transaction. Pay by bank transfer using the details below, then upload your receipt to Item cart Admin in Messages.</p>
+        </div>
+
+        <div class="payment-banner" id="payment-banner" role="status" aria-live="polite" style="display:none;"></div>
+
+        <div id="confirmation-transaction"></div>
+
+        <div class="account-prompt" id="confirmation-account" style="display:none;"></div>
+
+        <section class="confirmation-orders-section">
+          <div class="section-head">
+            <div><h2>Orders</h2></div>
+          </div>
+          <div id="confirmation-orders" class="order-card-list"></div>
+        </section>
+
+        <div class="confirmation-footer">
+          <a href="marketplace.html" class="btn btn-outline">Continue Shopping</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

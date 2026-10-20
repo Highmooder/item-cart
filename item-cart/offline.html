@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <title>You're offline — Item cart</title>
+  <!-- Shown by the service worker (sw.js) when a page can't be loaded and no saved copy exists. -->
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+</head>
+<body>
+  <main id="main-content">
+    <section>
+      <div class="container" style="padding-block: 96px; text-align: center;">
+        <a href="/" class="logo">Item <span>cart</span></a>
+        <h1>You're offline</h1>
+        <p style="margin-inline:auto">Item cart needs the internet to load vendors, products and chats. Check your connection, then try again.</p>
+        <!-- an empty href reloads the page you were trying to open -->
+        <a href="" class="btn btn-primary">Try again</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

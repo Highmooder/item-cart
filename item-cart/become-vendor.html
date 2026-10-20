@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1F6F4A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Item cart" />
+  <title>Become a Vendor — Item cart</title>
+  <meta name="description" content="Sell to students around your campus on Item cart. Free to join during launch." />
+  <meta property="og:site_name" content="Item cart" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Become a Vendor — Item cart" />
+  <meta property="og:description" content="Sell to students around your campus on Item cart. Free to join during launch." />
+  <meta property="og:image" content="https://YOUR-SITE-ADDRESS/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/become-vendor.css" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+  <script src="js/header-prepaint.js"></script>
+
+  <main id="main-content">
+
+    <section class="vendor-hero-section">
+      <div class="container">
+        <p class="badge">Free to join during launch</p>
+        <h1>Sell to students, right around your campus.</h1>
+        <p>Item cart connects your store with students at UNIOSUN who are already looking for what you sell — no storefront rent, no listing fees during launch.</p>
+        <div class="vendor-hero-section__actions">
+          <a href="#apply" class="btn btn-primary">Apply to Sell on Item cart</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-head">
+          <div><h2>Why sell on Item cart</h2></div>
+        </div>
+        <div class="benefits-grid" id="benefits-grid"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><h2>How selling on Item cart works</h2></div>
+        </div>
+        <div class="vendor-steps">
+          <div>
+            <span class="vendor-step__index">1</span>
+            <h3>Apply</h3>
+            <p>Tell us about your store — what you sell, where you're based, and how to reach you.</p>
+          </div>
+          <div>
+            <span class="vendor-step__index">2</span>
+            <h3>Review</h3>
+            <p>Item cart reviews your application. This is a manual step for now — no automatic approval.</p>
+          </div>
+          <div>
+            <span class="vendor-step__index">3</span>
+            <h3>Start selling</h3>
+            <p>Once approved, your store and products go live on the Item cart marketplace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="container">
+        <div class="pricing-callout">
+          <h2>Free during launch</h2>
+          <p>While Item cart is launching at UNIOSUN, there's no commission and no listing fee — you set your price, and students pay exactly that (plus delivery, if they choose it).</p>
+          <div class="pricing-callout__example">
+            <div><span class="label">Your price</span><strong>₦5,000</strong></div>
+            <div><span class="label">Item cart commission</span><strong>₦0</strong></div>
+            <div><span class="label">You receive</span><strong>₦5,000</strong></div>
+          </div>
+          <p class="pricing-callout__note">Pricing may change as Item cart grows — vendors will always be told in advance before anything changes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply">
+      <div class="container">
+        <div class="section-head">
+          <div><h2>Vendor application</h2></div>
+        </div>
+
+        <div class="vendor-form-card" id="vendor-form-wrap">
+          <form id="vendor-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="storeName-input">Store / business name</label>
+                <input type="text" id="storeName-input" name="storeName" />
+                <span class="field-error" id="storeName-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="ownerName-input">Owner name</label>
+                <input type="text" id="ownerName-input" name="ownerName" />
+                <span class="field-error" id="ownerName-error"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone-input">Phone number</label>
+                <input type="tel" id="phone-input" name="phone" />
+                <span class="field-error" id="phone-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="whatsapp-input">WhatsApp number</label>
+                <input type="tel" id="whatsapp-input" name="whatsapp" />
+                <span class="field-error" id="whatsapp-error"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email-input">Email</label>
+              <input type="text" id="email-input" name="email" />
+              <span class="field-error" id="email-error"></span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="school-input">School</label>
+                <select id="school-input" name="schoolId"></select>
+              </div>
+              <div class="form-group">
+                <label for="category-input">Category</label>
+                <select id="category-input" name="category"></select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="location-input">Location</label>
+              <input type="text" id="location-input" name="location" placeholder="e.g. Near the main gate, UNIOSUN" />
+              <span class="field-error" id="location-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="description-input">Business description</label>
+              <textarea id="description-input" name="description" rows="4" placeholder="What do you sell, and what makes your store worth checking out?"></textarea>
+              <span class="field-error" id="description-error"></span>
+            </div>
+
+            <!-- Trap for spam bots: people never see this box, bots fill it in. -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website-input">Website (leave this empty)</label>
+              <input type="text" id="website-input" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <p class="form-submit-error" id="vendor-submit-error"></p>
+
+            <p class="form-consent">By applying you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+
+            <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+          </form>
+        </div>
+
+        <div class="vendor-success" id="vendor-success" style="display:none;">
+          <span class="vendor-success__icon" id="vendor-success-icon"></span>
+          <h2>Application received.</h2>
+          <p>Item cart will review your application. We are not able to reach out yet in this prototype, but this is exactly the information our team would use to follow up with you.</p>
+          <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/become-vendor.js"></script>
+</body>
+</html>

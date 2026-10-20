@@ -1,0 +1,13 @@
+# Never commit secrets. The Paystack key, the Gemini key and the Supabase
+# service key live ONLY in Supabase's Secrets screen, never in files.
+.env
+.env.*
+*.pem
+*.key
+
+# Computer clutter
+.DS_Store
+Thumbs.db
+*.zip
+node_modules/
+.netlify/

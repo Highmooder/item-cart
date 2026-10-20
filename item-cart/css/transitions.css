@@ -1,0 +1,137 @@
+/* ============================================
+   ITEM CART — PAGE TRANSITIONS AND LOADING STATES
+   One place that decides how every page-to-page
+   move looks and feels, and what a page shows
+   while its content is still loading.
+   ============================================ */
+
+/* Smooth cross-page fade (Chrome, Edge, Safari 18.2+). Browsers that don't
+   support it simply navigate normally, so nothing breaks. */
+@view-transition {
+  navigation: auto;
+}
+
+/* The header is identical on every page, so it stays put while only the
+   page content fades underneath it. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+
+/* Stops the page shifting sideways by a scrollbar's width when you move
+   between a short page and a long one. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Keeps the footer from jumping up under the header while a page's
+   content is still loading. */
+#main-content {
+  min-height: 65vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* ---------- Loading placeholders ---------- */
+/* WHAT: grey placeholder cards and one spinner style, used by every page.
+   WHY: a page that is empty for a moment feels broken; a placeholder that
+   matches the final layout feels fast and stops the page jumping. */
+@keyframes rn-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes rn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Placeholder card. Put several inside a product-grid, vendor-grid or
+   category-grid: the real cards replace them when the data arrives. */
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  animation: rn-pulse 1.4s ease-in-out infinite;
+}
+
+/* the picture */
+.skeleton-card::before {
+  content: "";
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-alt);
+}
+
+/* the name, price and button lines */
+.skeleton-card::after {
+  content: "";
+  display: block;
+  height: 120px;
+  margin: var(--space-3);
+  background:
+    linear-gradient(var(--color-bg-alt), var(--color-bg-alt)) 0 0 / 75% 14px no-repeat,
+    linear-gradient(var(--color-bg-alt), var(--color-bg-alt)) 0 26px / 45% 12px no-repeat,
+    linear-gradient(var(--color-bg-alt), var(--color-bg-alt)) 0 100% / 100% 36px no-repeat;
+}
+
+.skeleton-card--vendor::before {
+  aspect-ratio: 16 / 9;
+}
+
+.skeleton-card--category {
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.skeleton-card--category::before {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: auto;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-card--category::after {
+  height: 16px;
+  margin: 0;
+  background: linear-gradient(var(--color-bg-alt), var(--color-bg-alt)) 0 0 / 70% 100% no-repeat;
+}
+
+/* Spinner + text, for pages and panels that have no cards to imitate.
+   The page's own script hides it (or calls finishLoading()). */
+.loading-state {
+  max-width: none;
+  padding-block: var(--space-7);
+  text-align: center;
+  color: var(--color-ink-soft);
+}
+
+.loading-state::before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 0 auto var(--space-3);
+  border: 2px solid var(--color-line-strong);
+  border-top-color: var(--color-brand);
+  border-radius: 50%;
+  animation: rn-spin 700ms linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card,
+  .loading-state::before {
+    animation: none;
+  }
+}

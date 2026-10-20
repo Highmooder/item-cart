@@ -1,0 +1,277 @@
+/* ============================================
+   MANAGE PRODUCTS — the vendor's own product page
+   Built from the shared listing, chip, button and badge components;
+   only what is specific to this page is here.
+   ============================================ */
+
+
+.vp-notice {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  font-size: var(--fs-sm);
+}
+
+#vp-stores {
+  margin-bottom: var(--space-4);
+}
+
+/* Same spacing rhythm as the Marketplace: one step (space-4) between each
+   block, so the Add product button never touches the filter chips below it. */
+#vp-app .listing-controls {
+  margin-bottom: var(--space-4);
+}
+
+.vp-filters {
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- Product rows ---------- */
+.vp-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.vp-item {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.vp-item__thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-bg-alt);
+}
+
+.vp-item__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vp-item__main {
+  min-width: 0;
+}
+
+.vp-item__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.vp-item__title h3 {
+  margin: 0;
+  font-size: var(--fs-md);
+}
+
+.vp-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vp-item__meta strong {
+  color: var(--color-ink);
+}
+
+.vp-item__note {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+}
+
+.vp-item__note--warn {
+  background: var(--color-accent-tint);
+}
+
+.vp-item__note--bad {
+  background: var(--color-danger-tint);
+}
+
+.vp-item__changes {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-soft);
+}
+
+.vp-item__changes li {
+  overflow-wrap: anywhere;
+}
+
+.vp-item__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.btn-danger-outline {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.btn-danger-outline:hover {
+  background: var(--color-danger-tint);
+}
+
+@media (min-width: 900px) {
+  .vp-item {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .vp-item__actions {
+    grid-column: auto;
+    justify-content: flex-end;
+    max-width: 320px;
+  }
+}
+
+/* ---------- Dialogs ---------- */
+.vp-dialog {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: var(--space-6);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.vp-dialog--small {
+  width: min(440px, calc(100% - 32px));
+}
+
+.vp-dialog::backdrop {
+  background: rgba(19, 26, 22, 0.5);
+}
+
+.vp-dialog h2 {
+  font-size: var(--fs-xl);
+}
+
+.vp-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.vp-dialog .form-group input[type="number"],
+.vp-dialog .form-group input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.vp-dialog .has-error {
+  border-color: var(--color-danger);
+}
+
+.vp-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--color-ink-faint);
+}
+
+.vp-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--space-4);
+}
+
+.vp-photo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.vp-photo .vp-item__thumb {
+  flex: none;
+  width: 80px;
+  height: 80px;
+}
+
+.vp-photo input[type="file"] {
+  min-width: 0;
+  max-width: 100%;
+  font-size: var(--fs-sm);
+}
+
+.vp-review-note {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-tint);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- Toast ---------- */
+.vp-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-5);
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: calc(100% - 32px);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-ink);
+  color: #fff;
+  font-size: var(--fs-sm);
+}
+
+.vp-toast--error {
+  background: var(--color-danger);
+}
+
+@media (max-width: 640px) {
+  .vp-dialog {
+    padding: var(--space-5);
+  }
+
+  .vp-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .vp-dialog__actions .btn {
+    flex: 1;
+  }
+
+  .vp-item {
+    padding: var(--space-3);
+  }
+}
+
+/* On phones the Add product button fills the row, like the Sort control
+   does on the Marketplace, so it is easy to tap and lines up with the rest. */
+@media (max-width: 640px) {
+  #vp-add {
+    flex: 1 1 100%;
+  }
+}

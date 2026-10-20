@@ -1,0 +1,82 @@
+# Netlify settings for the Item cart website.
+# WHAT: tells Netlify how to publish the site and which safety headers to add.
+# There is no build step: the site is plain HTML, CSS and JavaScript.
+
+[build]
+  publish = "."
+
+# ---------------------------------------------------------------------
+# Safety headers on every page
+# ---------------------------------------------------------------------
+#  nosniff          the browser must trust the file type we declare
+#  frame deny       nobody can put Item cart inside another site's frame (clickjacking)
+#  referrer         links to other sites don't leak the full page address
+#  permissions      Item cart never needs the camera, microphone, location or payment APIs
+#  CSP (Report-Only) lists the only places the site loads code, fonts and data from.
+#                   "Report-Only" means it NEVER blocks anything: the browser console just
+#                   warns if something would have been blocked. When you've browsed the whole
+#                   site (including checkout, chat and admin) with no warnings, rename it to
+#                   Content-Security-Policy to start enforcing it.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://esm.sh; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+
+# The admin page: keep it out of search results and never cache it.
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
+# The service worker (what makes Item cart installable and gives the offline page) and the app
+# manifest: the browser must always re-check them, or an update would reach phones days late.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "no-cache"
+
+# ---------------------------------------------------------------------
+# Keep the project's own files off the public website
+# ---------------------------------------------------------------------
+# The SQL files, Edge Function source and guides live in this repository but
+# aren't part of the site. These rules answer "not found" for them.
+[[redirects]]
+  from = "/database/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/DEPLOY_SETUP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
